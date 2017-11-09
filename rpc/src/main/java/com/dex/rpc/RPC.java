@@ -34,7 +34,7 @@ public class RPC {
         // 打包com目录为jar
         Bash bash = new Bash();
         bash.cd(dir);
-        bash.exec("jar -cvf myjar.jar " + packageDir);// jar目录下的co文件夹
+        bash.exec("jar -cvf myjar.jar " + packageDir);
         bash.commit();
         bash.close();
 

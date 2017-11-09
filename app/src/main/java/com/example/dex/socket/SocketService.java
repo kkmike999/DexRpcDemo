@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import dalvik.system.DexClassLoader;
 
@@ -18,7 +17,7 @@ import dalvik.system.DexClassLoader;
  */
 public class SocketService extends Service {
 
-    static final int RECEIVE_PORT = 10240;
+    static final int RECEIVE_PORT = 10086;
 
     SocketReceiver mReceiver;
 
@@ -84,13 +83,11 @@ public class SocketService extends Service {
         System.out.println("service execute dex task");
 
         try {
-            File           dexOutputDir = getDir("dex", 0);
-            DexClassLoader cl           = new DexClassLoader(path, dexOutputDir.getAbsolutePath(), null, getClassLoader());
+//            File           dexOutputDir = getDir("dex", 0);
+            DexClassLoader cl           = new DexClassLoader(path, getCacheDir().getPath(), null, getClassLoader());
 
             String taskName = getPackageName() + ".DexTask";
             Class  clazz    = cl.loadClass(taskName);
-            Method method   = clazz.getDeclaredMethod("run");
-            method.setAccessible(true);
 
             Runnable runnable = (Runnable) clazz.newInstance();
             runnable.run();

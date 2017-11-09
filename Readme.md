@@ -11,7 +11,7 @@ public class RPCTest {
         Bash.DEBUG = false;
 
         // "192.168.1.154"修改为app当前ip
-        RPC rpc = new RPC("com.example.dex", "192.168.1.154", 10240);
+        RPC rpc = new RPC("com.example.dex", "192.168.1.154", 10086);
         rpc.remoteRun();
     }
 }
