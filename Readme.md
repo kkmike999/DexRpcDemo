@@ -40,3 +40,7 @@ public class DexTask implements Runnable {
 运行app。
 
 执行`RPCTest.rpc()`单元测试，程序会编译、打包整个单元测试为dex文件，发送给app。app 10240端口接受到dex文件，自动查找`com.example.dex.DexTask`类，并执行`run()`。
+
+执行效果：
+
+![](demo.gif)
