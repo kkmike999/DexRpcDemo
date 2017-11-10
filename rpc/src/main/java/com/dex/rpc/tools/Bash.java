@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.Properties;
 
 /**
  * Created by kkmike999 on 2017/11/01.
@@ -38,7 +39,7 @@ public class Bash {
      * @param path
      */
     public void cd(String path) {
-        exec("cd " + encodePath(path));
+        exec("cd " + path);
     }
 
     public void exec(String commend) {
@@ -63,8 +64,16 @@ public class Bash {
     }
 
     public void bash() throws IOException {
-        File wd = new File("/bin");
-        proc = mRuntime.exec("/bin/bash", null, wd);
+        Properties props  = System.getProperties(); //获得系统属性集
+        String     osName = props.getProperty("os.name"); //操作系统名称
+
+        if (osName.startsWith("Windows")) {
+            File wd = new File("C:\\Windows\\System32\\");
+            proc = mRuntime.exec("C:\\Windows\\System32\\cmd", null, wd);
+        } else {
+            File wd = new File("/bin");
+            proc = mRuntime.exec("/bin/bash", null, wd);
+        }
 
         if (proc != null) {
             in = new BufferedReader(new InputStreamReader(proc.getInputStream()));

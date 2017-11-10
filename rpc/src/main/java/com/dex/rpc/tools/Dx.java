@@ -49,14 +49,14 @@ public class Dx {
         File   dxFile            = new File(ANDROID_HOME + "/build-tools/" + buildToolsVersion + "/dx");
         String dx                = dxFile.getPath() + " --dex --output=" + dexName + " " + jar.getName();
 
-        if (!dxFile.exists()) {
-            throw new RuntimeException(dxFile.getPath() + " 不存在");
-        }
-
         Bash bash = new Bash();
         bash.cd(parent);
         bash.exec(dx);
         bash.commitAndExit();
+
+        if (!dex.exists()) {
+            throw new RuntimeException(dex.getPath() + " 不存在");
+        }
 
         return dex.getPath();
     }

@@ -26,7 +26,7 @@ public class SocketSender {
             System.out.println("sending");
 
             Socket socket = new Socket();
-            socket.setSoTimeout(10 * 1000);
+            socket.setSoTimeout(5 * 1000);
             socket.connect(new InetSocketAddress(hostname, port));
 
             OutputStream os = socket.getOutputStream();
