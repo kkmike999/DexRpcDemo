@@ -14,7 +14,7 @@ public class RPCTest {
     public void rpc() throws Exception {
         Bash.DEBUG = false;
 
-        RPC rpc = new RPC("com.example.dex", "192.168.1.154", 10086);
+        RPC rpc = new RPC("192.168.1.154", 10086);
         rpc.remoteRun();
     }
 }

@@ -1,7 +1,7 @@
 package com.dex.rpc;
 
-import com.dex.rpc.tools.Bash;
 import com.dex.rpc.tools.Dx;
+import com.dex.rpc.tools.JarTool;
 import com.dex.rpc.tools.SocketSender;
 
 import java.io.File;
@@ -13,10 +13,8 @@ public class RPC {
 
     String hostname;
     int    port;
-    String packageName;
 
-    public RPC(String packageName, String hostname, int port) {
-        this.packageName = packageName;
+    public RPC(String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
     }
@@ -26,22 +24,17 @@ public class RPC {
      */
     public void remoteRun() {
         String dir = new File("build/intermediates/classes/test/debug").getAbsolutePath();
-        File   jar = new File(dir, "myjar.jar");
-        jar.delete();
 
-        String packageDir = packageName.split("\\.")[0];
+        JarTool jarTool = new JarTool(dir, "myjar.jar");
 
-        // 打包com目录为jar
-        Bash bash = new Bash();
-        bash.cd(dir);
-        bash.exec("jar -cvf myjar.jar " + packageDir);
-        bash.commit();
-        bash.close();
+        // 打包jar文件
+        String jarPath = jarTool.packageClass();
+        File   jar     = new File(jarPath);
 
         if (jar.exists()) {
             // dx
             Dx     dx      = new Dx();
-            String dexPath = dx.dx(jar.getPath(), "dex.jar");
+            String dexPath = dx.dx(jarPath, "dex.jar");
             File   dex     = new File(dexPath);
 
             jar.delete();
