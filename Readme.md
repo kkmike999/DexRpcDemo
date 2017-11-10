@@ -44,3 +44,7 @@ public class DexTask implements Runnable {
 执行效果：
 
 ![](demo.gif)
+
+----
+
+相关文章：http://www.jianshu.com/p/a039fd5046c2
