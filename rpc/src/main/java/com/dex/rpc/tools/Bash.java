@@ -42,6 +42,15 @@ public class Bash {
         exec("cd " + path);
     }
 
+    /**
+     * 切换盘符
+     *
+     * @param drive 盘符
+     */
+    public void changeDrive(String drive) {
+        exec(drive + ":");
+    }
+
     public void exec(String commend) {
         exec(new String[]{commend});
     }
