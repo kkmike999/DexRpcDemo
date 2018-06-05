@@ -34,6 +34,7 @@ public class JarTool {
         // 打包com目录为jar
         Bash bash = new Bash();
         bash.cd(classDir);
+        bash.changeDrive(classDir.substring(0, 1));
         bash.exec("jar -cvf " + jarName + " .");
         bash.commit();
         bash.close();

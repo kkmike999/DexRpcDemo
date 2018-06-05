@@ -51,6 +51,7 @@ public class Dx {
 
         Bash bash = new Bash();
         bash.cd(parent);
+        bash.changeDrive(parent.substring(0,1));
         bash.exec(dx);
         bash.commitAndExit();
 
